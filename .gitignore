@@ -32,4 +32,5 @@ Thumbs.db
 
 
 # Data Files
-online+retail/
+dataset/
+db/
