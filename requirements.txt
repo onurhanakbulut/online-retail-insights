@@ -1,0 +1,1 @@
+pandas @ file:///C:/miniconda3/conda-bld/pandas_1759822263292/work/dist/pandas-2.3.3-cp310-cp310-win_amd64.whl#sha256=1334d37cdb28f0f10d322297a276c0b56e115ad32f5bf3f0e575560f61a5ea74

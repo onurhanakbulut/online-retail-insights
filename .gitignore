@@ -1,0 +1,35 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+env/
+venv/
+.venv/
+.env
+*.egg-info/
+
+# Spyder and Anaconda project files
+.spyderproject
+.spyproject
+.spyderworkspace
+
+# Build outputs
+build/
+dist/
+
+# Jupyter / Spyder temporary files
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+*.tmp
+*.bak
+
+# System files
+.DS_Store
+Thumbs.db
+
+
+# Data Files
+online+retail/
