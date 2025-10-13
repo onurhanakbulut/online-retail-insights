@@ -17,7 +17,7 @@ agg AS (
 SELECT
   a.CustomerID,
   a.LastPurchase,
-  CAST( (strftime('%s', (SELECT ref_date FROM ref)) - strftime('%s', a.LastPurchase)) / 86400 AS INTEGER ) AS RecencyDays,
+  CAST( (strftime('%s', (SELECT ref_date FROM ref)) - strftime('%s', a.LastPurchase)) / 86400 AS INTEGER ) AS RecencyDays,  --strftime unix zamanina çevirir / gün
   a.Frequency,
   ROUND(a.Monetary, 2) AS Monetary
 FROM agg a;
