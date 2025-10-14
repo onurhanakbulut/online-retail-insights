@@ -19,7 +19,7 @@ df = pd.read_sql_query("SELECT * FROM churn_features;", conn)
 conn.close()
 
 
-##lr rf gradiant boosting
+##lr 
 
 features = [
     #'RecencyDays',#label leakage
