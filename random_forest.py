@@ -34,7 +34,7 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.3, rando
 
 #rf
 rf = RandomForestClassifier(
-    n_estimators = 200,
+    n_estimators = 100,
     max_depth = 6,
     random_state = 11,
     class_weight='balanced'
@@ -57,7 +57,6 @@ print("ROC-AUC:", round(roc_auc_score(y_test, y_proba), 3))
 importances = rf.feature_importances_#verdiği değerin + mı - mi katkı yaptıüını bilmiyoruz (shap)
 feat_imp = sorted(zip(features, importances), key=lambda x: x[1], reverse=True)
 
-#ROC AUC CURVE GRAPH
 plt.figure(figsize=(6,4))
 sns.barplot(x=[x[1] for x in feat_imp], y=[x[0] for x in feat_imp], palette='viridis')
 plt.title('Feature Importance (Random Forest)')
@@ -71,12 +70,8 @@ plt.show()
 explainer = shap.TreeExplainer(rf)
 shap_values = explainer.shap_values(x_test)
 
-shap.summary_plot(shap_values[1], x_test, plot_type='bar')
-
-shap.summary_plot(shap_values[1], x_test)
-
-
-
+sv = shap_values[1] if isinstance(shap_values, list) else shap_values   
+shap.summary_plot(sv, x_test)
 
 
 
