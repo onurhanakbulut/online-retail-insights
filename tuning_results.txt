@@ -1,0 +1,2 @@
+{'class_weight': 'balanced', 'max_depth': 8, 'min_samples_leaf': 4, 'min_samples_split': 2, 'n_estimators': 100}
+Best CV ROC-AUC: 0.946
