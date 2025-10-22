@@ -9,6 +9,7 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, RocCurveDi
 
 import shap
 import seaborn as sns
+import numpy as np
 
 DB_PATH = "db/online_retail.db"
 conn = sqlite3.connect(DB_PATH)
@@ -61,9 +62,10 @@ xgb_model.fit(x_train, y_train)
 y_pred = xgb_model.predict(x_test)
 y_proba = xgb_model.predict_proba(x_test)[:,1]
 
-#rapora
+#rapor
 print(classification_report(y_test, y_pred))
 print("ROC-AUC", round(roc_auc_score(y_test, y_proba), 3))
+
 
 
 ##conf-matrix
@@ -73,22 +75,32 @@ cm = confusion_matrix(y_test, y_pred)
 ConfusionMatrixDisplay.from_estimator(xgb_model, x_test, y_test)        ##319-63
                                                                         ##807-113# Recall = TP/FP+TP
                                                                         
-##SHAP- FEATURE IMPORTANCE
-
+##FEATURE IMPORTANCE
+#######------------feature bu ağacı nek adar iyi hala getirdi
 
 importances = xgb_model.feature_importances_
 feat_imp = pd.DataFrame({
     'Feature' : features,
-    'Importance' : importances
+     'Importance' : importances
     }).sort_values('Importance', ascending=False)
 
 plt.figure(figsize=(6,4))
 sns.barplot(x='Importance', y='Feature', data=feat_imp, palette='viridis')
-plt.title('Feature Importance (XGBoost - Gain)')
-plt.xlabel('Average Gain')
-plt.ylabel('Feature')
+plt.title('Feature Importance (XGBoost - Gain)')        ##Gain: bir özelliğin, modelin bilgi kazancına yaptığı katkı
+plt.xlabel('Average Gain')                              ##Cover: bir özelliğin karar ağaçlarında ne kadar sıklıkla kullanıldığı
+plt.ylabel('Feature')                                   ##Weight: özelliğin kaç kez split (bölme) noktası olarak seçildiği
 plt.show()
 
+##SHAP (Shapley Additive Explanations ##test verisi üzerinden global ve davranışsal sonuç
+
+
+
+explainer = shap.TreeExplainer(xgb_model)
+shap_values = explainer.shap_values(x_test)
+
+sv = shap_values[1] if isinstance(shap_values, list) else shap_values  
+shap.summary_plot(shap_values, x_test, plot_type="bar")     #ortalama etkiyi gösteren özet
+shap.summary_plot(sv, x_test)
 
 
 
