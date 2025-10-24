@@ -1,6 +1,6 @@
-# 🧠 Churn Prediction Model – Delivery Notes for ML Engineer
+#  Churn Prediction Model – Delivery Notes for ML Engineer
 
-## 1️⃣ Project Overview
+## 1️ Project Overview
 This model predicts **customer churn probability** in an e-commerce environment based on customer activity and spending patterns.  
 The objective is to identify customers at risk of leaving so that the marketing team can take preventive actions.
 
@@ -13,7 +13,7 @@ The objective is to identify customers at risk of leaving so that the marketing 
 
 ---
 
-## 2️⃣ Data Summary
+## 2️ Data Summary
 **Source:** `online_retail.db → churn_features`  
 **Total records:** 4338  
 **Target column:** `Churn` (0 = active, 1 = churned)
@@ -27,7 +27,7 @@ The objective is to identify customers at risk of leaving so that the marketing 
 
 ---
 
-## 3️⃣ Data Splitting Strategy
+## 3️ Data Splitting Strategy
 | Split | Percentage | Description |
 |--------|-------------|-------------|
 | **Train** | 70% of total | Used for Optuna optimization & model training |
@@ -38,7 +38,7 @@ Validation set was used to determine the **best threshold (0.67)** ensuring Prec
 
 ---
 
-## 4️⃣ Model Configuration
+## 4️ Model Configuration
 
 **Final optimized hyperparameters (via Optuna):**
 | Parameter | Value |
@@ -58,7 +58,7 @@ Validation set was used to determine the **best threshold (0.67)** ensuring Prec
 
 ---
 
-## 5️⃣ Model Files
+## 5️ Model Files
 | File | Description |
 |------|-------------|
 | `models/xgboost_churn/churn_xgb_model.pkl` | Trained and serialized XGBoost model |
@@ -68,7 +68,7 @@ Validation set was used to determine the **best threshold (0.67)** ensuring Prec
 
 ---
 
-## 6️⃣ Environment & Dependencies
+## 6️ Environment & Dependencies
 **Python version:** 3.11  
 **Libraries:**
 xgboost==2.1.0
