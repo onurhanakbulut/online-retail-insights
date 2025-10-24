@@ -41,13 +41,14 @@ y = df[target].astype(int)
 
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, stratify=y, random_state=11)
-
+pos_w = (y_train==0).sum() / (y_train==1).sum() 
 
 
 xgb_model = xgb.XGBClassifier(
     n_estimators =300,  ##ardı ardına agaç sayisi
     learning_rate=0.05, #dengeli ögrenme orani
     max_depth=4,    #dallanabilecegi agac derinligi
+    scale_pos_weight = pos_w,
     subsample=0.8,  #agaclar verinin %80ini kullanır.
     colsample_bytree=0.8,   #colomnların (featureların) %80i
     reg_lambda=1.0, #L2 regularization Ridge cezası katsayısı (dengeli ogrenim, overfiti engeller,underfit olmaz)
@@ -59,8 +60,11 @@ xgb_model = xgb.XGBClassifier(
 
 xgb_model.fit(x_train, y_train)
 
-y_pred = xgb_model.predict(x_test)
+#y_pred = xgb_model.predict(x_test)
 y_proba = xgb_model.predict_proba(x_test)[:,1]
+
+threshold = 0.50 ###xgboost_threshold.py
+y_pred = (y_proba >= threshold).astype(int)
 
 #rapor
 print(classification_report(y_test, y_pred))
