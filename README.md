@@ -5,7 +5,7 @@ with an interactive **Streamlit dashboard** for business insights.
 
 https://archive.ics.uci.edu/dataset/352/online%2Bretail?utm_source=chatgpt.com
 
-
+DEMO : **https://churn-dashboard-demo.streamlit.app**   <-------
 
 
 #  Churn Prediction Model – Delivery Notes for ML Engineer
